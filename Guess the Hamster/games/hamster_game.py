@@ -1,6 +1,7 @@
 import random
+from libs import data
 import main
-koin = 0
+koin = data.game_status['koin']
 ws = 0
 auto_catch = 0
 double_point = 0
@@ -18,7 +19,7 @@ def event(koin):
     print(hamster_event)
     pil = int(input(f'''kamu Win Streak 5x! sekarang tebak di lubang mana hamster berada?
 \n{lobang_event1}\npilihlah pilihan berikut [1 - 10]: '''))
-    
+
     while pil > 10:
             pil = int(input(f'''\nInput tidak valid! tolong inputkan sesuai pilihan!
 {lobang_event1}\npilihlah pilihan berikut [1 - 10]: '''))
@@ -26,11 +27,11 @@ def event(koin):
 
     if pil == hamster_event:
         print(f'\nselamat anda memenangkan event!\n{lobang_event}\nhamster ada di {hamster_event} dan pilihanmu adalah {pil}')
-        koin += 50
-        win_event = True
+        data.game_status['koin'] += 50
+        data.game_status['win_event'] = True
     else:
         print(f'\nmaaf anda kalah!\n{lobang_event}\nhamster ada di {hamster_event} dan pilihanmu adalah {pil}')
-    return koin
+    return data.game_status['koin']
 
 
 # looping ketika pemain memilih melanjutkan bermain
@@ -49,9 +50,9 @@ def singleplayer():
         print(hamster)
         print(lobang_kosong)
         pil_power = int(input(f'''
-1. auto-catch: {auto_catch}
-2. double-point: {double_point}
-3. fifty-fifty: {fifty_fifty}
+1. auto-catch: {data.game_status['auto_catch']}
+2. double-point: {data.game_status['double_point']}
+3. fifty-fifty: {data.game_status['fifty_fifty']}
 4. keluar
 ingin gunakan PowerUP? [1 / 2 / 3 / 4]: '''))
         print('====================')
@@ -66,18 +67,19 @@ ingin gunakan PowerUP? [1 / 2 / 3 / 4]: '''))
     # memastikan keyakinan memilih
         if pil == hamster:
             print(f'\nselamat anda menang!\n{lobang_berderet}\nhamster ada di {hamster} dan pilihanmu adalah {pil}')
-            koin += 10
+            data.game_status['koin'] += 10
             ws += 1
         else:
             print(f'\nmaaf anda kalah!\n{lobang_berderet}\nhamster ada di {hamster} dan pilihanmu adalah {pil}')
 
         # trigger event
         if ws == 1:
-            koin = event(koin)
+            koin = data.game_status['koin']
+            data.game_status['koin'] = event(koin)
             ws = 0
             
     # memastikan kelanjutan bermain
-        print(f'\nKoin saat ini: {koin}')
+        print(f'\nKoin saat ini: {data.game_status['koin']}')
         mainlagi = input('kamu mau main lagi? [y / n]: ')
         while mainlagi.lower() not in ['y', 'n']:
             mainlagi = input('kesalahan input! tolong pilih sesuai pilihan! [y / n]: ')
