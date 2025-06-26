@@ -1,3 +1,6 @@
+from libs import data
+import main
+
 # Fungsi untuk menyimpan struktur data achievement
 def data_achievement():
     achievement = set()
@@ -9,13 +12,13 @@ def data_achievement():
     }
     return achievement, achievement_guide
 
-# Cek dan update achievement berdasarkan kondisi
-def cek_achievement(achievement, koin, is_developer, menang_event, skor, top_score):
-    if koin > 1000:
+# Cek dan update achievement berdasarkan kondisi langsung dari data.game_status
+def cek_achievement(achievement, skor, top_score):
+    if data.game_status['koin'] > 50:
         achievement.add("💰 AKU KAYA!")
-    if menang_event:
+    if data.game_status['win_event']:
         achievement.add("🐐 GOAT!!!!")
-    if is_developer:
+    if data.game_status['is_developer']:
         achievement.add("🤯 A DEVELOPER!!??")
     if skor > top_score:
         achievement.add("🥇 NAMBA WAN!!")
@@ -40,19 +43,39 @@ def tampilkan_petunjuk(achievement, achievement_guide):
     if not belum_didapat:
         print("Semua achievement telah didapatkan!")
 
-# Contoh penggunaan
-if __name__ == "__main__":
-    # Ambil data achievement
-    achievement, achievement_guide = data_achievement()
+def achievement_collections():
+    skor = 950          # contoh skor pengguna
+    top_score = 900     # contoh skor tertinggi
 
-    # Contoh input data
-    koin = 1200
-    is_developer = True
-    menang_event = True
+    # Inisialisasi achievement & panduannya
+    achievement_set, achievement_guide = data_achievement()
+
+    # Proses pengecekan achievement berdasarkan status
+    cek_achievement(achievement_set, skor, top_score)
+
+    # Tampilkan koleksi & panduan
+    tampilkan_achievement(achievement_set)
+    tampilkan_petunjuk(achievement_set, achievement_guide)
+
+    input("\nTekan Enter untuk kembali ke menu...")
+    main.menu()
+
+
+# Contoh penggunaan mandiri
+if __name__ == "__main__":
+    # Inisialisasi nilai untuk testing manual
+    data.game_status['koin'] = 1200
+    data.game_status['is_developer'] = True
+    data.game_status['win_event'] = True
+
+    # Input skor dan skor tertinggi
     skor = 950
     top_score = 900
 
+    # Ambil data achievement
+    achievement, achievement_guide = data_achievement()
+
     # Proses dan tampilkan hasil
-    cek_achievement(achievement, koin, is_developer, menang_event, skor, top_score)
+    cek_achievement(achievement, skor, top_score)
     tampilkan_achievement(achievement)
     tampilkan_petunjuk(achievement, achievement_guide)
