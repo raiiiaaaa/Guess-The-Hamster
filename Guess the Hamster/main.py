@@ -1,20 +1,8 @@
-from libs import login, menu_message
+from libs.login import login, menu_message
+from libs import data
 from shop import hamster_shop
 from games import hamster_game
-
-database = {
-    "Rayyuuu": "SevenHamster",
-    "Jojo": "ParnoMusic"
-}
-
-koin = 0
-ws = 0
-auto_catch = 0
-double_point = 0
-fifty_fifty = 0
-skor = 0
-is_developer = False
-win_event = False
+import achievement
 
 def menu():
     menu_message()
@@ -24,8 +12,8 @@ def menu():
         hamster_game.singleplayer()
     # elif pilihan == "2":
     #     vs_bot()
-    # elif pilihan == "3":
-    #     achievement_collections()
+    elif pilihan == "3":
+        achievement.achievement_collections()
     elif pilihan == "4":    
         print("🛒 Selamat datang di PowerUP Shop!\n")
         hamster_shop.PowerUP_shop()
