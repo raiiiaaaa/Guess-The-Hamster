@@ -20,7 +20,7 @@ def cek_achievement(achievement, skor, top_score):
         achievement.add("🐐 GOAT!!!!")
     if data.game_status['is_developer']:
         achievement.add("🤯 A DEVELOPER!!??")
-    if skor > top_score:
+    if data.game_status['skor'] > top_score:
         achievement.add("🥇 NAMBA WAN!!")
 
 # Menampilkan achievement yang telah diraih
@@ -59,23 +59,3 @@ def achievement_collections():
 
     input("\nTekan Enter untuk kembali ke menu...")
     main.menu()
-
-
-# Contoh penggunaan mandiri
-if __name__ == "__main__":
-    # Inisialisasi nilai untuk testing manual
-    data.game_status['koin'] = 1200
-    data.game_status['is_developer'] = True
-    data.game_status['win_event'] = True
-
-    # Input skor dan skor tertinggi
-    skor = 950
-    top_score = 900
-
-    # Ambil data achievement
-    achievement, achievement_guide = data_achievement()
-
-    # Proses dan tampilkan hasil
-    cek_achievement(achievement, skor, top_score)
-    tampilkan_achievement(achievement)
-    tampilkan_petunjuk(achievement, achievement_guide)
