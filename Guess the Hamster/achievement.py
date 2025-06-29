@@ -1,27 +1,26 @@
 from libs import data
-import main
 
 # Fungsi untuk menyimpan struktur data achievement
 def data_achievement():
     achievement = set()
     achievement_guide = {
-        "💰 AKU KAYA!": "Dapatkan lebih dari 1000 koin.",
+        "💰 AKU KAYA!": "Dapatkan lebih dari 500 koin.",
         "🐐 GOAT!!!!": "Menangkan event 1x.",
         "🤯 A DEVELOPER!!??": "Login menggunakan akun developer.",
-        "🥇 NAMBA WAN!!": "Skor harus melewati top 1 scoreboard."
+        "🥇 DON'T WORRY, YOU'RE STRONG!!": "Pemain harus lose streak sebanyak 5x."
     }
     return achievement, achievement_guide
 
 # Cek dan update achievement berdasarkan kondisi langsung dari data.game_status
-def cek_achievement(achievement, skor, top_score):
+def cek_achievement(achievement):
     if data.game_status['koin'] > 50:
         achievement.add("💰 AKU KAYA!")
     if data.game_status['win_event']:
         achievement.add("🐐 GOAT!!!!")
     if data.game_status['is_developer']:
         achievement.add("🤯 A DEVELOPER!!??")
-    if data.game_status['skor'] > top_score:
-        achievement.add("🥇 NAMBA WAN!!")
+    if data.game_status['5lose_streak']:
+        achievement.add("🥇 DON'T WORRY, YOU'RE STRONG!!")
 
 # Menampilkan achievement yang telah diraih
 def tampilkan_achievement(achievement):
@@ -44,18 +43,16 @@ def tampilkan_petunjuk(achievement, achievement_guide):
         print("Semua achievement telah didapatkan!")
 
 def achievement_collections():
-    skor = 950          # contoh skor pengguna
-    top_score = 900     # contoh skor tertinggi
 
     # Inisialisasi achievement & panduannya
     achievement_set, achievement_guide = data_achievement()
 
     # Proses pengecekan achievement berdasarkan status
-    cek_achievement(achievement_set, skor, top_score)
+    cek_achievement(achievement_set)
 
     # Tampilkan koleksi & panduan
     tampilkan_achievement(achievement_set)
     tampilkan_petunjuk(achievement_set, achievement_guide)
 
     input("\nTekan Enter untuk kembali ke menu...")
-    main.menu()
+    return
