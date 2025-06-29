@@ -1,12 +1,6 @@
 from libs import data
 import time
 
-# Database akun
-database = {
-    "Rayyuuu": "SevenHamster",
-    "Jojo": "ParnoMusic"
-}
-
 # Fungsi login lengkap
 def login():
     while True:
@@ -16,13 +10,13 @@ def login():
             username = input("Masukkan username: ")
             password = input("Masukkan password: ")
 
-            if username in database and database[username] == password:
+            if username in data.database and data.database[username] == password:
                 print("Login berhasil! Selamat datang,", username)
                 if username == 'Rayyuuu':
                     print('Anda login sebagai developer!')
                     data.game_status['is_developer'] = True
-                    return True, username, True  # login sukses, nama, developer=True
-                return True, username, False  # login sukses, nama, developer=False
+                data.game_status['username'] = username
+                return
             else:
                 kesempatan -= 1
                 print(f"Username atau password salah. Sisa kesempatan: {kesempatan}\n")
@@ -41,10 +35,3 @@ def menu_message():
     print (f" 4. PowerUP Shop ")
     print (f" 5. Exit ")
     print (f'=========================')
-
-# Contoh penggunaan
-if __name__ == '__main__':
-    success, username, is_developer = login()
-    menu_message()
-    
-    # Di sini kamu bisa lanjutkan ke menu atau logika berikutnya
