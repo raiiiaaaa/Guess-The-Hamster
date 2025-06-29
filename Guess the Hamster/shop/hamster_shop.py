@@ -1,13 +1,12 @@
 import random
 from libs import data
-import main
 
 def PowerUP_shop():
     print("=== POWER UP SHOP ===")
     print(f"Koin Anda: {data.game_status['koin']}")
-    print("1. Auto Catching - 50 koin")
+    print("1. Auto Catch - 50 koin")
     print("   (Menangkap hamster secara otomatis)")
-    print("2. 2X!! - 30 koin") 
+    print("2. Double Point - 10 koin") 
     print("   (Double poin jika benar, hangus jika salah)")
     print("3. Fifty-fifty - 40 koin")
     print("   (Memberikan 2 pilihan : 1 benar & 1 salah)")
@@ -19,11 +18,11 @@ def PowerUP_shop():
     if pilihan == "1":
         PowerUP_buy("auto_catch", 50)
     elif pilihan == "2":
-        PowerUP_buy("double_point", 30)
+        PowerUP_buy("double_point", 10)
     elif pilihan == "3":
         PowerUP_buy("fifty_fifty", 40)
     elif pilihan == "0":
-        main.menu()
+        return
     else:
         print(f"Input tidak valid. Coba lagi!\n")
         PowerUP_shop()
@@ -69,6 +68,3 @@ def fifty_fifty(posisi_hamster):
         print("50-50 chance! Satu benar, satu salah!")
         return pilihan_tersisa
     return None
-
-if __name__ == '__main__':
-    PowerUP_shop()
