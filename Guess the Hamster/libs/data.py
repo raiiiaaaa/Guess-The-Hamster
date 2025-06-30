@@ -1,4 +1,3 @@
-# status player
 game_status = {
     'username': None,
     "koin": 0,
@@ -8,7 +7,7 @@ game_status = {
     '5lose_streak': False,
     "is_developer": False,
     "win_event": False,
-    'rich_coin':False
+    'rich_coin': False
 }
 
 
