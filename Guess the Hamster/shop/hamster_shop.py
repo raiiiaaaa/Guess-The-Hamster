@@ -10,10 +10,10 @@ def PowerUP_shop():
     print("   (Double poin jika benar, hangus jika salah)")
     print("3. Fifty-fifty - 40 koin")
     print("   (Memberikan 2 pilihan : 1 benar & 1 salah)")
-    print("0. Kembali")
+    print("4. Kembali")
     print('==============================')
 
-    pilihan = input("Beli power up (0-3): ")
+    pilihan = input("Beli power up (1-4): ")
 
     if pilihan == "1":
         PowerUP_buy("auto_catch", 50)
@@ -21,7 +21,7 @@ def PowerUP_shop():
         PowerUP_buy("double_point", 10)
     elif pilihan == "3":
         PowerUP_buy("fifty_fifty", 40)
-    elif pilihan == "0":
+    elif pilihan == "4":
         return
     else:
         print(f"Input tidak valid. Coba lagi!\n")
