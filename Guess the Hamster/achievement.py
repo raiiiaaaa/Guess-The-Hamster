@@ -4,23 +4,23 @@ from libs import data
 def data_achievement():
     achievement = set()
     achievement_guide = {
-        "💰 AKU KAYA!": "Dapatkan lebih dari 500 koin.",
-        "🐐 GOAT!!!!": "Menangkan event 1x.",
-        "🤯 A DEVELOPER!!??": "Login menggunakan akun developer.",
-        "🥇 DON'T WORRY, YOU'RE STRONG!!": "Pemain harus lose streak sebanyak 5x."
+        "🤑💰 AKU KAYA❗": "Dapatkan lebih dari 500 koin.",
+        "🖐🤠🖐 GOAT🔥": "Menangkan event 1x.",
+        "🙌👑 A DEVELOPER❗❗❓❓": "Login menggunakan akun developer.",
+        "💪😉 DON'T WORRY, YOU'RE THE STRONGEST❗❗": "Pemain harus lose streak sebanyak 5x."
     }
     return achievement, achievement_guide
 
 # Cek dan update achievement berdasarkan kondisi langsung dari data.game_status
 def cek_achievement(achievement):
-    if data.game_status['koin'] > 50:
-        achievement.add("💰 AKU KAYA!")
+    if data.game_status['rich_coin']:
+        achievement.add("🤑💰 AKU KAYA❗")
     if data.game_status['win_event']:
-        achievement.add("🐐 GOAT!!!!")
+        achievement.add("🖐🤠🖐 GOAT🔥")
     if data.game_status['is_developer']:
-        achievement.add("🤯 A DEVELOPER!!??")
+        achievement.add("🙌👑 A DEVELOPER❗❗❓❓❓")
     if data.game_status['5lose_streak']:
-        achievement.add("🥇 DON'T WORRY, YOU'RE STRONG!!")
+        achievement.add("💪😉 DON'T WORRY, YOU'RE THE STRONGEST❗❗")
 
 # Menampilkan achievement yang telah diraih
 def tampilkan_achievement(achievement):
