@@ -31,9 +31,8 @@ def login():
 
 def menu_message():
     print (f"\n====== MENU UTAMA ======")
-    print (f" 1. Singleplayer ")
-    print (f" 2. VS Bot ")
-    print (f" 3. Achievement Collections ")
-    print (f" 4. PowerUP Shop ")
-    print (f" 5. Exit ")
+    print (f"1. Play Game")
+    print (f"2. Achievement Collections")
+    print (f"3. PowerUP Shop")
+    print (f"4. Exit")
     print (f'=========================')
