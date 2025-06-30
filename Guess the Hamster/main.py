@@ -21,7 +21,7 @@ def menu():
             print("👋 Terima kasih telah bermain!")
             break
         else:
-            print(f"Input tidak valid. Coba lagi!\n")
+            print(f"Input tidak valid. pilih sesuai menu!\n")
 
 def main():
     login()
