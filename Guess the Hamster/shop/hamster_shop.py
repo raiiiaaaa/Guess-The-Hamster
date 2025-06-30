@@ -1,6 +1,8 @@
 import random
 from libs import data
 
+__all__ = ['PowerUP_shop', 'use_auto_catch', 'use_double_point', 'use_fifty_fifty']
+
 def PowerUP_shop():
     print("=== POWER UP SHOP ===")
     print(f"Koin Anda: {data.game_status['koin']}")
@@ -32,39 +34,59 @@ def PowerUP_buy(nama, harga):
         data.game_status['koin'] -= harga
         data.game_status[nama] += 1
         print(f"Berhasil membeli {nama.replace('_', ' ').title()}!")
-        print(f"Sisa koin: {data.game_status['koin']}")
     else:
         print("Koin tidak cukup!")
     PowerUP_shop()
 
-def auto_catch(posisi_hamster):
+def use_auto_catch(hamster_pos):
+    """Langsung menang, mengurangi power-up, dan return hasil menang"""
     if data.game_status["auto_catch"] > 0:
         data.game_status["auto_catch"] -= 1
-        print(f"Auto Catch digunakan!")
-        print(f"Hamster ditemukan di posisi {posisi_hamster}!")
-        return True
-    return False
+        print(f"\n🧲 Auto Catch digunakan! Hamster otomatis tertangkap di lubang {hamster_pos}!")
+        return {
+            'status': 'win',
+            'powerup': 'auto_catch',
+            'hamster': hamster_pos,
+            'bonus': 10
+        }
+    else:
+        print('PowerUP anda kosong!\n')
+    return None
 
-def double_point():
+def use_double_point(player_choice, hamster_pos):
+    """Gandakan skor jika benar, hangus jika salah"""
     if data.game_status["double_point"] > 0:
         data.game_status["double_point"] -= 1
-        print("2X Points diaktifkan!")
-        print("Hati-hati: Poin hangus jika salah!")
-        return True
-    return False
+        if player_choice == hamster_pos:
+            return {
+                'status': 'win',
+                'powerup': 'double_point',
+                'bonus': 20
+            }
+        else:
+            return {
+                'status': 'lose',
+                'powerup': 'double_point',
+                'bonus': 0
+            }
+    else:
+        print('PowerUP anda kosong!\n')
+    return None
 
-def fifty_fifty(posisi_hamster):
+def use_fifty_fifty(hamster_pos):
+    """Tampilkan 1 jawaban benar dan 1 salah"""
     if data.game_status["fifty_fifty"] > 0:
         data.game_status["fifty_fifty"] -= 1
-        print("Fifty-Fifty digunakan!")
+        print("\n🎰 Fifty-Fifty digunakan!")
 
-        posisi_lain = [i for i in range(1, 4) if i != posisi_hamster]
-        posisi_salah = random.choice(posisi_lain)
+        opsi = [1, 2, 3]
+        opsi.remove(hamster_pos)
+        pilihan_salah = random.choice(opsi)
 
-        pilihan_tersisa = [posisi_hamster, posisi_salah]
-        pilihan_tersisa.sort()
-
-        print(f"Pilihan tersisa: {pilihan_tersisa}")
-        print("50-50 chance! Satu benar, satu salah!")
-        return pilihan_tersisa
+        pilihan = [hamster_pos, pilihan_salah]
+        pilihan.sort()
+        print(f"Pilihan tersisa: {pilihan} (1 berisi, 1 kosong!)")
+        return pilihan
+    else:
+        print('PowerUP anda kosong!\n')
     return None
