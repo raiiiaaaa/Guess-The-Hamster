@@ -7,11 +7,14 @@ game_status = {
     "fifty_fifty": 0,
     '5lose_streak': False,
     "is_developer": False,
-    "win_event": False
+    "win_event": False,
+    'rich_coin':False
 }
+
 
 # Database akun
 database = {
     "Rayyuuu": "SevenHamster",
-    "Jojo": "ParnoMusic"
+    "Jojo": "ParnoMusic",
+    'j':'j'
 }
