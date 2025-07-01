@@ -1,3 +1,4 @@
+# status player
 game_status = {
     'username': None,
     "koin": 0,
@@ -10,10 +11,16 @@ game_status = {
     'rich_coin': False
 }
 
-
 # Database akun
 database = {
-    "Rayyuuu": "SevenHamster",
-    "Jojo": "ParnoMusic",
-    'j':'j'
+    "Rayyuuu": "SevenHamster05",
+    "Jojo": "ParnoMusic99",
+    "Nbzzz":'Hdrrr21',
+    'Dwicchi':'Sentinel01',
+    'Pesci':'Josstr14',
+    'Jorno':'JovvNaa0',
+    'RkaaGNTNG':'Cibau90',
+    'FII_TZY':'Bantiii1K02',
+    'Slmaaa':'UNSKShtiii11',
+    'MORRRAA':'SunJinWoo88'
 }
