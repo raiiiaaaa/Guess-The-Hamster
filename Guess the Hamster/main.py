@@ -1,5 +1,5 @@
 from libs.login import login, menu_message
-from shop.hamster_shop import PowerUP_shop
+from shop.hamster_powerup import PowerUP_shop
 from games.hamster_game import play_game
 from achievement import achievement_collections
 
