@@ -74,7 +74,6 @@ def play_game():
             try:
                 print('\n========== GUESS THE HAMSTER ==========')
                 print('LIST POWERUP')
-                print(hamster)
                 print(f'''1. auto-catch: {data.game_status['auto_catch']}
 2. double-point: {data.game_status['double_point']}
 3. fifty-fifty: {data.game_status['fifty_fifty']}
