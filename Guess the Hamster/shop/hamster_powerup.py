@@ -69,8 +69,6 @@ def use_double_point(player_choice, hamster_pos):
                 'powerup': 'double_point',
                 'bonus': 0
             }
-    else:
-        print('PowerUP anda kosong!\n')
     return None
 
 def use_fifty_fifty(hamster_pos):
