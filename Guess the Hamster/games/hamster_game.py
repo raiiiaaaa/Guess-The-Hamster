@@ -41,7 +41,7 @@ def event():
         data.game_status['koin'] += 100
 
         # PENENTUAN ACHIEVEMENT KEKAYAAN KOIN PLAYER
-        if data.game_status['koin'] >= 500 and not data.game_status['rich_coin']:
+        if data.game_status['koin'] > 500 and not data.game_status['rich_coin']:
             data.game_status['rich_coin'] = True
             print('>>> Kamu mendapatkan achievement! 🤑💰 AKU KAYA❗ <<<')
 
@@ -58,7 +58,8 @@ def event():
 '''PROGRAM GAME UTAMA '''
 def play_game():
     global ws, ls, double_point     # MEMASUKKAN DATA VARIABEL KE LOKAL FUNCTION
-
+    
+    ''' MENAMPILAN DERETAN LUBANG '''
     while True:
         lobang = '|O|'
         lobang_berderet = [lobang] * 3  # MEMBUAT VARIABEL ARRAY DENGAN NILAI LOBANG X 3
@@ -187,7 +188,7 @@ hamster ada di {hamster} dan kamu menggunakan Auto Catch!''')
             ls += 1
 
         # PENENTUAN ACHIEVEMENT KEKAYAAN KOIN PLAYER
-        if data.game_status['koin'] >= 500 and not data.game_status['rich_coin']:
+        if data.game_status['koin'] > 500 and not data.game_status['rich_coin']:
             data.game_status['rich_coin'] = True
             print('>>> Kamu mendapatkan achievement! 🤑💰 AKU KAYA❗ <<<')
 
