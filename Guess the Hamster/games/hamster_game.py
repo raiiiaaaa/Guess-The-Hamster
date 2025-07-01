@@ -1,16 +1,17 @@
 import random
 from libs import data
-from shop.hamster_shop import use_auto_catch, use_double_point, use_fifty_fifty
+from shop.hamster_powerup import use_auto_catch, use_double_point, use_fifty_fifty
 
 ws = 0
 ls = 0
 double_point = False
 
+''' EVENT MODE '''
 def event():
     lobang = '|0|'
-    lobang_event = [lobang] * 10
+    lobang_event = [lobang] * 10                # LOBANG BERDERET BERJUMLAH 10 DI MODE EVENT
     lobang_event1 = lobang_event.copy()
-    hamster_event = random.randint(1, 10)
+    hamster_event = random.randint(1, 10)       # MENGALOKASIKAN POSISI HAMSTER MODE EVENT
     lobang_event[hamster_event - 1] = '|🐹|'
     lobang_event = ' '.join(lobang_event)
     lobang_event1 = ' '.join(lobang_event1)
@@ -40,7 +41,7 @@ def event():
         data.game_status['koin'] += 100
 
         # PENENTUAN ACHIEVEMENT KEKAYAAN KOIN PLAYER
-        if data.game_status['koin'] >= 50 and not data.game_status['rich_coin']:
+        if data.game_status['koin'] >= 500 and not data.game_status['rich_coin']:
             data.game_status['rich_coin'] = True
             print('>>> Kamu mendapatkan achievement! 🤑💰 AKU KAYA❗ <<<')
 
@@ -54,6 +55,7 @@ def event():
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
     return data.game_status['koin']
 
+'''PROGRAM GAME UTAMA '''
 def play_game():
     global ws, ls, double_point     # MEMASUKKAN DATA VARIABEL KE LOKAL FUNCTION
 
@@ -66,11 +68,12 @@ def play_game():
         lobang_berderet_str = ' '.join(lobang_berderet)     # MENGGANTI SISI KURUNG ARRAY DENGAN STRING KOSONG
         lobang_kosong_str = ' '.join(lobang_kosong)
 
-        # VALIDASI POWERUP INPUT
-        print('\n========== GUESS THE HAMSTER ==========')
-        # INPUT PEMILIHAN POWERUP
+        ''' INPUT PEMILIHAN POWERUP '''
         while True:
             try:
+                print('\n========== GUESS THE HAMSTER ==========')
+                print('LIST POWERUP')
+                print(hamster)
                 print(f'''1. auto-catch: {data.game_status['auto_catch']}
 2. double-point: {data.game_status['double_point']}
 3. fifty-fifty: {data.game_status['fifty_fifty']}
@@ -86,14 +89,17 @@ def play_game():
             except ValueError:      # KODE INI UNTUK MENGHANDLE PYTHON CRASH JIKA INPUTAN ADALAH STRING
                 print("Input tidak valid. pilih sesuai menu!")
 
-        # MEKANISME POWER UP
-        hasil_power = None
-        if pil_power == 1:      # AUTO CATCH POWERUP
+        ''' MEKANISME POWER UP '''
+        hasil_power = None      # VARIABEL UNTUK PENENTUAN HASIL PENGGUNAAN POWERUP
+
+        # AUTO CATCH POWERUP
+        if pil_power == 1:
             hasil_power = use_auto_catch(hamster)
             if hasil_power:
+                print('========================================')
                 print(f'''selamat anda menang!\n{lobang_berderet_str}
 hamster ada di {hamster} dan kamu menggunakan Auto Catch!''')
-                
+                print('========================================')
                 data.game_status['koin'] += hasil_power['bonus']    # PENAMBAHAN DATA KOIN
                 ws += 1
                 ls = 0
@@ -101,9 +107,11 @@ hamster ada di {hamster} dan kamu menggunakan Auto Catch!''')
                     data.game_status['koin'] = event()
                     ws = 0
                 print(f'Koin saat ini: {data.game_status["koin"]}')
+                print(f'Win Streak saat ini: {ws}')
                 
                 # VALIDASI KELANJUTAN BERMAIN
                 mainlagi = input('kamu mau main lagi? [y / n]: ')
+                print('========================================')
                 while mainlagi.lower() not in ['y', 'n']:
                     mainlagi = input('kesalahan input! tolong pilih sesuai pilihan! [y / n]: ')
                 if mainlagi.lower() == 'n':
@@ -111,25 +119,27 @@ hamster ada di {hamster} dan kamu menggunakan Auto Catch!''')
                 else:
                     continue        # PROGRAM GAME BERLANJUT
 
-        elif pil_power == 2:        # DOUBLE POINT POWERUP
+        # DOUBLE POINT POWERUP
+        elif pil_power == 2:        
             if data.game_status['double_point'] > 0:
-                double_point = True
-                print("\n🔥 Double Point digunakan!\n⚠️ Hati-hati: Jika salah, tidak dapat poin!")
+                double_point = True     # VARIABEL UNTUK MEMANGGIL FUNCTION DOUBLE POINT
+                print("\n🔥 Double Point digunakan!\n⚠️ Hati-hati: Jika salah, Double Point gugur!")
             else:
                 print("PowerUP anda kosong!\n")
 
-
-        elif pil_power == 3:        # FIFTY-FIFTY POWERUP
+        # FIFTY-FIFTY POWERUP
+        elif pil_power == 3:
             pilihan_tersisa = use_fifty_fifty(hamster)
             if pilihan_tersisa:
                 print(f"Gunakan pilihan ini: {pilihan_tersisa}")
 
-        # MENGINPUT TEBAKAN PLAYER
+        ''' MENGINPUT TEBAKAN PLAYER '''
         while True:
             try:
-                print('========================================')
-                print(f'halo {data.game_status["username"]}! tebak di lubang mana hamster berada?\n{lobang_kosong_str}')
+                print('\n========================================')
+                print(f'HALO {data.game_status["username"]}! tebak di lubang mana hamster berada?\n{lobang_kosong_str}')
                 pil = int(input(f'pilih sesuai menu berikut [1 / 2 / 3]: '))
+                print('========================================')
 
                 # VALIDASI INPUTAN PLAYER
                 if pil in [1, 2, 3]:
@@ -138,8 +148,8 @@ hamster ada di {hamster} dan kamu menggunakan Auto Catch!''')
                     print("Input tidak valid. pilih sesuai menu!")
             except ValueError:      # KODE INI UNTUK MENGHANDLE PYTHON CRASH JIKA INPUTAN ADALAH STRING
                 print("Input tidak valid. pilih sesuai menu!")
-            print('========================================\n\n')
 
+        # PEMANGGILAN FUNCTION DOUBLE POINT POWERUP
         if double_point:
             hasil_power = use_double_point(pil, hamster)
 
@@ -148,8 +158,13 @@ hamster ada di {hamster} dan kamu menggunakan Auto Catch!''')
         # PENENTUAN HASIL GAME
         if pil == hamster:
             print(f'selamat anda menang!\n{lobang_berderet_str}\nhamster ada di {hamster} dan pilihanmu adalah {pil}')
+            
+            # NOTIF POWERUP DOUBLE POINT GUGUR JIKA KALAH
+            if hasil_power and hasil_power['powerup'] == 'double_point':
+                print("Berkat double point, anda mendapatkan 2x koin!")
 
-            # PENAMBAHAN DATA KOIN
+
+            # PENAMBAHAN DATA 2X KOIN
             bonus = hasil_power['bonus'] if hasil_power and hasil_power['powerup'] == 'double_point' else 10
             data.game_status['koin'] += bonus
             ws += 1
@@ -161,14 +176,18 @@ hamster ada di {hamster} dan kamu menggunakan Auto Catch!''')
                 ws = 0
         else:
             print(f'maaf anda kalah!\n{lobang_berderet_str}\nhamster ada di {hamster} dan pilihanmu adalah {pil}')
+            ws = 0
+            # NOTIF POWERUP DOUBLE POINT GUGUR JIKA KALAH
             if hasil_power and hasil_power['powerup'] == 'double_point':
                 print("Sayang sekali, double point hangus karena jawaban salah!")
-            if not data.game_status['5lose_streak']:
-                ls += 1
-        print('========================================')
+        print('========================================\n')
+
+        # LOSE STREAK TIDAK AKAN BERTAMBAH JIKA SUDAH DAPAT ACHIEVEMENT
+        if not data.game_status['5lose_streak']:
+            ls += 1
 
         # PENENTUAN ACHIEVEMENT KEKAYAAN KOIN PLAYER
-        if data.game_status['koin'] >= 50 and not data.game_status['rich_coin']:
+        if data.game_status['koin'] >= 500 and not data.game_status['rich_coin']:
             data.game_status['rich_coin'] = True
             print('>>> Kamu mendapatkan achievement! 🤑💰 AKU KAYA❗ <<<')
 
@@ -179,6 +198,7 @@ hamster ada di {hamster} dan kamu menggunakan Auto Catch!''')
 
         # VALIDASI KELANJUTAN BERMAIN
         print(f'Koin saat ini: {data.game_status["koin"]}')
+        print(f'Win Streak saat ini: {ws}')
         mainlagi = input('kamu mau main lagi? [y / n]: ')
 
         # MEMVALIDASI INPUTAN MENU
