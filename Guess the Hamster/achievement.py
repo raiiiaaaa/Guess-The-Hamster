@@ -18,7 +18,8 @@ def cek_achievement(achievement):
     if data.game_status['win_event']:
         achievement.add("🖐🤠🖐 GOAT🔥")
     if data.game_status['is_developer']:
-        achievement.add("🙌👑 A DEVELOPER❗❗❓❓❓")
+        achievement.add("🙌👑 A DEVELOPER❗❗❓❓")
+
     if data.game_status['5lose_streak']:
         achievement.add("💪😉 DON'T WORRY, YOU'RE THE STRONGEST❗❗")
 
@@ -32,7 +33,7 @@ def tampilkan_achievement(achievement):
             print(f"- {a}")
 
 # Menampilkan petunjuk achievement yang belum diraih
-def tampilkan_petunjuk(achievement, achievement_guide):
+def tampilkan_petunjuk(achievement, achievement_guide): 
     print("\n📌 PETUNJUK MENDAPATKAN ACHIEVEMENT:")
     belum_didapat = False
     for nama, petunjuk in achievement_guide.items():
@@ -50,7 +51,7 @@ def achievement_collections():
     # Proses pengecekan achievement berdasarkan status
     cek_achievement(achievement_set)
 
-    # Tampilkan koleksi & panduan
+    # Tampilkan koleksi & panduan atau cara mendapatkan achievement
     tampilkan_achievement(achievement_set)
     tampilkan_petunjuk(achievement_set, achievement_guide)
 
