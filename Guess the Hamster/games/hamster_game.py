@@ -74,10 +74,10 @@ def play_game():
             try:
                 print('\n========== GUESS THE HAMSTER ==========')
                 print('LIST POWERUP')
-                print(f'''1. auto-catch: {data.game_status['auto_catch']}
-2. double-point: {data.game_status['double_point']}
-3. fifty-fifty: {data.game_status['fifty_fifty']}
-4. keluar''')
+                print(f'''1. Auto Catch: {data.game_status['auto_catch']}
+2. Double Point: {data.game_status['double_point']}
+3. Fifty-Fifty: {data.game_status['fifty_fifty']}
+4. Tidak''')
                 pil_power = int(input('ingin gunakan PowerUP? [1 / 2 / 3 / 4]: '))
                 print('========================================')
 
