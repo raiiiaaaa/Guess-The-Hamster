@@ -7,3 +7,5 @@ IF24D
 2. RAYYA SEVARENO (games)
 3. JONATAN SAPUTRA SIMBOLON (achievement)
 4. DWI ARYA DAFFANSYAH (PowerUP)
+
+what's next update? coming soon...
